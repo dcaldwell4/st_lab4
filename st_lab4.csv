@@ -1,0 +1,6 @@
+,resourceID,isResourceAvailable,statusUpdated,emailSent,Result
+TC1,null,*,*,*,false 
+TC2,not null,false ,*,*,false 
+TC3,not null,true ,false ,*,DatabaseFailureException
+TC4,not null,true ,true ,false ,EmailFailureException
+TC5,not null,true ,true ,true ,true 
