@@ -3,11 +3,9 @@ package Library;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.junit.jupiter.params.ParameterizedTest;
 import static org.mockito.Mockito.*;
 import org.mockito.ArgumentMatchers.*;
 
@@ -96,23 +94,5 @@ class LibraryServiceTest {
                 + " checked out.", contains(resourceId.toString()));
     }
 
-    // Parameterized Test for all cases
-    @ParameterizedTest
-    @CsvSource({
-            "admin@uca.edu"
-    })
-    void checkoutResourceTest(String email)
-            throws DatabaseFailureException, EmailFailureException {
-        UUID resourceId = UUID.randomUUID();
-        when(resourceRepository.isResourceAvailable(resourceId)).thenReturn(true);
-        when(resourceRepository.updateStatus(resourceId, false)).thenReturn(true);
-        when(emailProvider.sendEmail(eq(email), anyString())).thenReturn(true);
-
-        libraryService.checkoutResource(resourceId, email);
-
-        verify(emailProvider).sendEmail(
-                eq(email),
-                eq("Resource ID: " + resourceId + " checked out.")
-        );
-    }
 }
+
