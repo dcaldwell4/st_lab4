@@ -18,6 +18,7 @@ class LibraryServiceTest {
     @Mock
     private ResourceRepository resourceRepository;
 
+    // for field injection
     @InjectMocks
     private LibraryService libraryService;
 
